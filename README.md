@@ -1,72 +1,136 @@
-Symfony Standard Edition
-========================
+# Guillaume Loulier - Website
 
-Welcome to the Symfony Standard Edition - a fully-functional Symfony
-application that you can use as the skeleton for your new applications.
+## Build
 
-For details on how to download and get started with Symfony, see the
-[Installation][1] chapter of the Symfony Documentation.
+This project is followed and tested inside a CI process, with this approach, the project is completely
+tested and easily maintainable, here's the tools who help the development process : 
 
-What's inside?
---------------
+### Insight
 
-The Symfony Standard Edition is configured with the following defaults:
+### Gitlab
 
-  * An AppBundle you can use to start coding;
+### Blackfire
 
-  * Twig as the only configured template engine;
+## Usage
 
-  * Doctrine ORM/DBAL;
+This project is build using Docker along with PHP, Nginx, Postgres, MySQL, MongoDB and Blackfire.
 
-  * Swiftmailer;
+This way, the project can be used in differents ways : 
 
-  * Annotations enabled for everything.
+### Docker:
 
-It comes pre-configured with the following bundles:
+This project use Docker environment files in order to allow the configuration according to your needs,
+this way, you NEED to define a .env file in order to launch the build.
 
-  * **FrameworkBundle** - The core Symfony framework bundle
+**_In order to perform better, Docker can block your dependencies installation and return an error 
+or never change your php configuration, we recommand to delete all your images/containers 
+before building the project_**
 
-  * [**SensioFrameworkExtraBundle**][6] - Adds several enhancements, including
-    template and routing annotation capability
+```bash
+docker stop $(docker ps -a -q)
+docker rm $(docker ps -a -q)
+docker rmi $(docker images -a -q) -f
+```
 
-  * [**DoctrineBundle**][7] - Adds support for the Doctrine ORM
+**Note that this command can take several minutes before ending**
 
-  * [**TwigBundle**][8] - Adds support for the Twig templating engine
+Once this is done, let's build the project.
 
-  * [**SecurityBundle**][9] - Adds security by integrating Symfony's security
-    component
+```bash
+touch .env
+```
 
-  * [**SwiftmailerBundle**][10] - Adds support for Swiftmailer, a library for
-    sending emails
+Then add the following keys according to your identifiers:
 
-  * [**MonologBundle**][11] - Adds support for Monolog, a logging library
+```text
+# Global
+CONTAINER_NAME=home
 
-  * **WebProfilerBundle** (in dev/test env) - Adds profiling functionality and
-    the web debug toolbar
+# Servers Ports
+NGINX_PORT=port
+PHP_PORT=9000 -> default port
 
-  * **SensioDistributionBundle** (in dev/test env) - Adds functionality for
-    configuring and working with Symfony distributions
+# DB Ports
+MYSQL_PORT=3306
+POSTGRES_PORT=5432
+MONGO_PORT=27017
+MAIL_DEV_PORT=port
 
-  * [**SensioGeneratorBundle**][13] (in dev env) - Adds code generation
-    capabilities
+# Database
+DB_USERNAME=name
+DB_PASSWORD=name
+DB_NAME=name
+MYSQL_ROOT_PASSWORD=root
+MYSQL_ROOT_HOST=172.20.0.1
 
-  * [**WebServerBundle**][14] (in dev env) - Adds commands for running applications
-    using the PHP built-in web server
+# Blackfire
+BLACKFIRE_SERVER_ID='blc'
+BLACKFIRE_SERVER_TOKEN='blc'
 
-  * **DebugBundle** (in dev/test env) - Adds Debug and VarDumper component
-    integration
+```
 
-All libraries and bundles included in the Symfony Standard Edition are
-released under the MIT or BSD license.
+Then build the project:
 
-Enjoy!
+```bash
+docker-composer up -d --build
+```
 
-[1]:  https://symfony.com/doc/3.3/setup.html
-[6]:  https://symfony.com/doc/current/bundles/SensioFrameworkExtraBundle/index.html
-[7]:  https://symfony.com/doc/3.3/doctrine.html
-[8]:  https://symfony.com/doc/3.3/templating.html
-[9]:  https://symfony.com/doc/3.3/security.html
-[10]: https://symfony.com/doc/3.3/email.html
-[11]: https://symfony.com/doc/3.3/logging.html
-[13]: https://symfony.com/doc/current/bundles/SensioGeneratorBundle/index.html
-[14]: https://symfony.com/doc/current/setup/built_in_web_server.html
+Then you must use Composer in order to launch the application : 
+
+```bash
+composer install --prefer-dist --no-dev --no-autoloader --no-scripts --no-progress --no-suggest
+composer clear-cache
+composer dump-autoload --optimize --classmap-authoritative --no-dev
+```
+
+Once the project is build, let's play with the database : 
+
+```bash
+./bin/console d:d:c  --connection=production # In production
+
+./bin/console d:d:c --connection=development # In development
+```
+
+For more informations, please check the official documentation : [Symfony](https://symfony.com/doc/current/doctrine/multiple_entity_managers.html)
+
+Once this is done, access the project via your browser : 
+
+- Dev : 
+
+```
+http://localhost:port/app_dev.php/
+```
+
+- Prod : 
+
+```
+http://localhost:port/app.php/
+```
+
+If you need to perform some tasks:
+
+```bash
+docker exec -it home_php-fpm sh
+```
+
+Once in the container:
+
+```bash
+# Example for clearing the cache
+./bin/console c:c --env=prod || rm -rf var/cache/*
+```
+
+**Please note that you MUST open a second terminal in order to keep git ou other commands line outside of Docker**
+
+### PHP CLI
+
+```bash
+cd core
+php bin/console s:r || ./bin/console s:r
+```
+
+Then access the project via your browser: 
+
+```
+http://localhost:8000
+```
