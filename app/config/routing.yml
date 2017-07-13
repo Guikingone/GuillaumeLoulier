@@ -1,3 +1,4 @@
-app:
-    resource: '@AppBundle/Controller/'
-    type: annotation
+home:
+    path:    /
+    methods: ['GET']
+    defaults: { _controller: AppBundle\Action\HomeAction }
