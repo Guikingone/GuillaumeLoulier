@@ -7,6 +7,8 @@ tested and easily maintainable, here's the tools who help the development proces
 
 ### Insight
 
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/9f8bb447-7982-472d-bb3d-1e927045b09b/big.png)](https://insight.sensiolabs.com/projects/9f8bb447-7982-472d-bb3d-1e927045b09b)
+
 ### Gitlab
 
 ### Blackfire

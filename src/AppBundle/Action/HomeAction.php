@@ -36,6 +36,9 @@ final class HomeAction
     }
 
     /**
+     * @throws \InvalidArgumentException
+     * @throws \RuntimeException
+     *
      * @return Response
      */
     public function __invoke()
