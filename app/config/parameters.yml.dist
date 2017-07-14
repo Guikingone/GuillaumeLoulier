@@ -25,3 +25,4 @@ parameters:
 
     # Symfony secret
     secret: PANDYH2N29363N6839U783NLAPPD72NK?2000MDPE
+    session_name: project
