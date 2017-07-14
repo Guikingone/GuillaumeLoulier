@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Home project.
+ * This file is part of the GuillaumeLoulier project.
  *
  * (c) Guillaume Loulier <contact@guillaumeloulier.fr>
  *
@@ -41,7 +41,7 @@ final class HomeAction
      *
      * @return Response
      */
-    public function __invoke()
+    public function __invoke() : Response
     {
         return new Response(
             $this->renderEngine->render('default/index.html.twig')

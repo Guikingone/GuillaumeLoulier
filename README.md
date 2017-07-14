@@ -47,6 +47,7 @@ Then add the following keys according to your identifiers:
 ```text
 # Global
 CONTAINER_NAME=home
+WORKDIR=/path/to/define
 
 # Servers Ports
 NGINX_PORT=port

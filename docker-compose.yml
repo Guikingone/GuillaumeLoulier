@@ -6,7 +6,7 @@ services:
         container_name: ${CONTAINER_NAME}_debian
         build: .
         volumes:
-            - './:/var/www/_home:rw'
+            - './:${WORKPATH}:rw'
         restart: always
         networks:
             - backend
@@ -20,11 +20,10 @@ services:
         links:
             - debian
         volumes:
-            - './:/var/www/_home:rw'
+            - './:${WORKPATH}:rw'
             - './docker/nginx/conf/core/nginx.conf:/etc/nginx/conf/nginx.conf:ro'
             - './docker/nginx/conf/app/dev:/etc/nginx/conf.d:ro'
-            # Uncomment this line for production.
-            # - './docker/nginx/conf/app/prod:/etc/nginx/conf.d:ro'
+            # - './docker/nginx/conf/app/prod:/etc/nginx/conf.d:ro' -> Uncomment this line for production.
             - './docker/nginx/logs/:/var/log/nginx'
         restart: always
         networks:
@@ -37,7 +36,7 @@ services:
         links:
             - debian
         volumes:
-            - './:/var/www/_home'
+            - './:${WORKPATH}:rw'
         restart: always
         networks:
             - frontend
@@ -48,14 +47,12 @@ services:
         environment:
             BLACKFIRE_SERVER_ID: '${BLACKFIRE_SERVER_ID}'
             BLACKFIRE_SERVER_TOKEN: ${BLACKFIRE_SERVER_TOKEN}
-            BLACKFIRE_CLIENT_ID: ${BLACKFIRE_CLIENT_ID}
-            BLACKFIRE_CLIENT_TOKEN: ${BLACKFIRE_CLIENT_TOKEN}
         ports:
             - '${PHP_PORT}:9000'
         links:
             - debian
         volumes:
-            - './:/var/www/_home:rw'
+            - './:${WORKPATH}:rw'
         restart: always
         networks:
             - backend
@@ -117,7 +114,7 @@ services:
         links:
             - php-fpm
         volumes:
-            - './:/var/www/_home:rw'
+            - './:${WORKPATH}:rw'
         restart: always
         networks:
             - backend

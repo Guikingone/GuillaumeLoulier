@@ -46,6 +46,9 @@
         ],
         "post-update-cmd": [
             "@symfony-scripts"
+        ],
+        "post-deploy-cmd": [
+            "chmod -R ug+w $APP_DIR/var"
         ]
     },
     "config": {

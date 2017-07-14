@@ -1,6 +1,6 @@
 FROM debian
 
-ENV WORKDIR "/var/www/_home"
+ENV WORKDIR "/var/www/home"
 
 ADD . ${WORKDIR}
 

@@ -1,6 +1,6 @@
 FROM php:7.1.6-fpm
 
-ENV WORKDIR "/var/www/_home"
+ENV WORKDIR "/var/www/home"
 
 RUN apt-get update -y \
     && apt-get install -y \

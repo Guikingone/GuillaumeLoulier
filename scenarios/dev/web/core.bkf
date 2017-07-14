@@ -1,0 +1,8 @@
+scenario
+
+    name "Main pages - Web"
+    endpoint "http://172.20.0.1:8000/app_dev.php/"
+
+    visit url('/')
+        expect status_code() == 200
+        expect body() matches "/Guillaume Loulier - Developer/"

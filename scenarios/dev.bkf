@@ -1,1 +1,1 @@
-load 'dev/*.bkf'
+load 'dev/**/*.bkf'

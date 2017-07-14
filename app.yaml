@@ -1,0 +1,6 @@
+# Google Cloud : App Engine (flexible env)
+runtime: php
+env: flex
+
+runtime_config:
+    document_root: web
