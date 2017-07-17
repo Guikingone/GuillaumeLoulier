@@ -54,7 +54,7 @@ abstract class ArticleModel
     private $tags;
 
     /**
-     * @var
+     * @var int
      */
     private $author;
 
@@ -122,7 +122,7 @@ abstract class ArticleModel
     /**
      * @return \DateTime
      */
-    public function getUpdatedAt()
+    public function getUpdatedAt() : \DateTime
     {
         return $this->updatedAt;
     }
@@ -138,7 +138,7 @@ abstract class ArticleModel
     /**
      * @return string
      */
-    public function getContent()
+    public function getContent() : string
     {
         return $this->content;
     }
@@ -149,5 +149,61 @@ abstract class ArticleModel
     public function setContent(string $content)
     {
         $this->content = $content;
+    }
+
+    /**
+     * @return array
+     */
+    public function getTags() : array
+    {
+        return $this->tags;
+    }
+
+    /**
+     * @param TagsModel $tags
+     */
+    public function addTags(TagsModel $tags)
+    {
+        $this->tags[] = $tags;
+    }
+
+    /**
+     * @param array $tags
+     */
+    public function setTags(array $tags)
+    {
+        $this->tags = $tags;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAuthor()
+    {
+        return $this->author;
+    }
+
+    /**
+     * @param mixed $author
+     */
+    public function setAuthor($author)
+    {
+        $this->author = $author;
+    }
+
+    /**
+     * @return array
+     */
+    public function getComments() : array
+    {
+        return $this->comments;
+    }
+
+    /**
+     * @param array $comments
+     */
+    public function setComments(array $comments)
+    {
+        $this->comments = $comments;
     }
 }

@@ -38,7 +38,7 @@ class HomeActionTest extends KernelTestCase
         $action = static::$kernel->getContainer()
                                  ->get(HomeAction::class);
 
-        $this->assertInstanceOf(HomeAction::class, $action);
+        static::assertInstanceOf(HomeAction::class, $action);
     }
 
     /**
@@ -49,6 +49,6 @@ class HomeActionTest extends KernelTestCase
         $action = static::$kernel->getContainer()
                                  ->get(HomeAction::class);
 
-        $this->assertObjectHasAttribute('renderEngine', $action);
+        static::assertObjectHasAttribute('renderEngine', $action);
     }
 }

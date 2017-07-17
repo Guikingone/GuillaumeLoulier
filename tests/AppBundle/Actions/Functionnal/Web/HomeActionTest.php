@@ -37,12 +37,12 @@ class HomeActionTest extends WebTestCase
     {
         $crawler = $this->client->request('GET', '/');
 
-        $this->assertEquals(
+        static::assertEquals(
             Response::HTTP_OK,
             $this->client->getResponse()->getStatusCode()
         );
 
-        $this->assertContains(
+        static::assertContains(
             'Guillaume Loulier - Developer',
             $crawler->filter('title')->text()
         );

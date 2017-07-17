@@ -9,19 +9,16 @@
  * file that was distributed with this source code.
  */
 
-namespace tests\AppBundle\Model\Unit;
+namespace AppBundle\Entity;
 
-use PHPUnit\Framework\TestCase;
+use AppBundle\Model\TagsModel;
 
 /**
- * Class ArticleModelTest
+ * Class Tags
  *
- * @author Guillaume Loulier <contact@guillaumeloulier.fr<
+ * @author Guillaume Loulier <contact@guillaumeloulier.fr>
  */
-class ArticleModelTest extends TestCase
+class Tags extends TagsModel
 {
-    public function testInstantiation()
-    {
 
-    }
 }
